@@ -1,0 +1,42 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* box-sizing is not inherited by default, since we set box-sizing on the body element,
+    /* we can set inherit on the universal selector so that all elemenst inside of the body
+    /* (which is everything) inherit the declaration from the body */
+    box-sizing: inherit;
+}
+
+html {
+    /* Assuming the default font-size is 16px, this converts it to 10px */
+    // This defines what 1 rem is
+    font-size: 62.5%;
+
+    @include respond($tablet-landscape) {
+        font-size: 56.25%;
+    }
+
+    @include respond($tablet-portrait) {
+        font-size: 50%; // 1rem = 8px, 8/16 == 50%
+    }
+
+    @include respond($big-desktop) {
+        font-size: 75%;
+    }
+}
+
+body {
+    box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond($tablet-portrait) {
+        padding: 0;
+    }
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}

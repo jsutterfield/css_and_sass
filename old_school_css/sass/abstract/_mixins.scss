@@ -1,0 +1,53 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin gradient-for-shape {
+    background-image: linear-gradient(to right,$color-primary-light, $color-primary-dark);
+    display: inline-block;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@mixin center-horizontally-and-vertically {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
+
+/* MEDIA QUERY MANAGER
+0 - 600px          Phone
+600px - 900px      Tablet Portrait
+900px - 1200px     Tablet Landscape
+1200px -1800px     Normal styles applied
+1800px +           Big Desktop
+
+1 em = 16px (that's the standard on the browser)
+$breakpoint argument choices:
+- phone
+- tablet-portrait
+- tablet-landscape
+- big-desktop
+*/
+@mixin respond($breakpoint) {
+    @if $breakpoint == $phone {
+        @media only screen and (max-width: 37.5em) { @content; } // 600px
+    }
+
+    @if $breakpoint == $tablet-portrait {
+        @media only screen and (max-width: 56.25em) { @content; } // 900px
+    }
+
+    @if $breakpoint == $tablet-landscape {
+        @media only screen and (max-width: 75em) { @content; } // 1200px
+    }
+
+    @if $breakpoint == $big-desktop {
+        @media only screen and (min-width: 112.5em) { @content; } // 1800px
+    }
+}
